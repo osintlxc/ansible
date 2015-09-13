@@ -1,0 +1,23 @@
+---
+- name: Fastd via pkg manager
+  hosts: all
+  gather_facts: yes
+  #sudo: no
+  connection: "{{ kitchen_connection | default('local') }}"
+  #vars_files:
+  #- "vpnserver_pkg_vars.yml"
+  roles:
+  - apt
+  - openssh
+  - batman-adv-14
+  - fastd
+  - alfred-announce
+  - icvpn
+  - ipv6-exit
+  - ntp-chrony
+  - exit
+  - dns-unbound
+  - dhcp-dnsmasq
+  - system
+  - tmpfs
+  - tools

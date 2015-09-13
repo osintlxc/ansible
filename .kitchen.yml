@@ -1,0 +1,24 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name               : ansible_push
+  verbose            : "vv"
+  ansible_config     : "ansible.cfg"
+  idempotency_test   : False
+  sudo               : True
+  #extra_vars        : "@kitchen_vars.yml"
+
+platforms:
+- name: Debian-jessie
+  driver:
+    box: debian/jessie64
+    customize:
+      memory: 128
+
+suites:
+  - name: vpnserver
+    provisioner:
+      playbook: "test/application/vpnserver.yml"
+      extra_vars: {'kitchen_connection': 'smart'}

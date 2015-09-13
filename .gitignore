@@ -1,2 +1,4 @@
 # build products...
 *.py[co]
+.kitchen/
+.kitchen.local.yml
