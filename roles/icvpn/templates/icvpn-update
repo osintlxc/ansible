@@ -1,5 +1,5 @@
 #!/bin/sh -e
-# {{ ansible_managed }}
+# {{ our_ansible_managed }}
 DATADIR=/opt/{{ site_code }}/icvpn-meta
 
 cd /etc/tinc/icvpn

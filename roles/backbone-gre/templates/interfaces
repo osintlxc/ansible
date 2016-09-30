@@ -1,4 +1,4 @@
-# {{ ansible_managed }}
+# {{ our_ansible_managed }}
 
 {% for host in backbone_peers %}
 {% set ifname = "backbone-vpn%d" % hostvars[host].vpn_id %}

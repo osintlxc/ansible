@@ -1,4 +1,4 @@
-# {{ ansible_managed }}
+# {{ our_ansible_managed }}
 
 allow-hotplug {{ fastd_interface }}
 iface {{ fastd_interface }} inet manual

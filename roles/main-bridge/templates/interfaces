@@ -1,4 +1,4 @@
-# {{ ansible_managed }}
+# {{ our_ansible_managed }}
 
 auto br-{{ site_code }}
 iface br-{{ site_code }} inet static

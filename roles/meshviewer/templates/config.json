@@ -1,5 +1,5 @@
 {
-  "DON'T CHANGE!": "{{ ansible_managed }}",
+  "DON'T CHANGE!": "{{ our_ansible_managed }}",
   "dataPath": "{{ meshviewer_web_path }}",
   "siteName": "Freifunk Bremen",
   "mapSigmaScale": 0.5,

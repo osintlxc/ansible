@@ -1,4 +1,4 @@
-# {{ ansible_managed }}
+# {{ our_ansible_managed }}
 
 auto {{ batman_dummy_interface }}
 iface {{ batman_dummy_interface }} inet manual

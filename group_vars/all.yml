@@ -6,3 +6,4 @@ site_domain:          'bremen.freifunk.net'
 site_vpn_prefix:      'vpn'
 icvpn_as:             65196
 fastd_peers_limit:    150
+our_ansible_managed:  "Ansible managed: roles/{{ ansible_managed.split('roles/') | last }}"

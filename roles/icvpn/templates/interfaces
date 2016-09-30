@@ -1,4 +1,4 @@
-# {{ ansible_managed }}
+# {{ our_ansible_managed }}
 allow-hotplug {{ icvpn_interface }}
 iface {{ icvpn_interface }} inet static
 	address {{ icvpn_ipv4.address }}

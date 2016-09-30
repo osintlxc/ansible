@@ -1,4 +1,4 @@
-# {{ ansible_managed }}
+# {{ our_ansible_managed }}
 
 auto {{ exit_ipv4_interface }}
 iface {{ exit_ipv4_interface }} inet manual

@@ -1,6 +1,6 @@
 <?php
 
-# {{ ansible_managed }}
+# {{ our_ansible_managed }}
 
 return array(
   'mysql.implementation' => 'AphrontMySQLiDatabaseConnection',

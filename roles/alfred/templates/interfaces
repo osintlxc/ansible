@@ -1,4 +1,4 @@
-# {{ ansible_managed }}
+# {{ our_ansible_managed }}
 
 auto {{ alfred_mtu_interface }}
 iface {{ alfred_mtu_interface }} inet manual
