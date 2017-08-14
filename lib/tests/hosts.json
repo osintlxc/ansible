@@ -14,6 +14,11 @@
     "_meta": {
         "hostvars": {
             "vpn01.bremen.freifunk.net": {
+                "babel_ipv6": {
+                    "netmask": "ffff:ffff:ffff:ffff:0000:0000:0000:0000",
+                    "size": 64,
+                    "address": "fd2f:5119:f2d::1"
+                },
                 "batman_ipv4": {
                     "netmask": "255.255.0.0",
                     "size": 16,
@@ -60,6 +65,11 @@
                 }
             },
             "service.example.com": {
+                "babel_ipv6": {
+                    "netmask": "ffff:ffff:ffff:ffff:0000:0000:0000:0000",
+                    "size": 64,
+                    "address": "fd2f:5119:f2d::a"
+                },
                 "vpn_id": 10,
                 "batman_ipv4": {
                     "netmask": "255.255.0.0",
@@ -95,13 +105,15 @@
             "site_code": "ffhb",
             "site": {
                 "site_code": "ffhb",
+                "node_prefix6": "fd2f:5119:0f2d::/64",
                 "site_name": "Freifunk Bremen",
                 "prefix6": "fd2f:5119:f2c::/64",
                 "prefix4": "10.196.0.0/16"
             },
             "ipv6_global_network": "2a06:8782:ffbb:1337:0000:0000:0000:0000/64",
             "ipv4_network": "10.196.0.0/16",
-            "ipv6_uplink_network": "2a06:8782:ffbb:0000:0000:0000:0000:0000/64"
+            "ipv6_uplink_network": "2a06:8782:ffbb:0000:0000:0000:0000:0000/64",
+            "ipv6_babel_network": "fd2f:5119:0f2d:0000:0000:0000:0000:0000/64"
         }
     }
 }

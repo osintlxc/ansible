@@ -30,6 +30,17 @@
 - name: Stop and disable fastd via System V init script
   service: name=fastd enabled=no
 
+- name: Include fastd instance for babel
+  import_tasks: instance.yml
+  vars:
+    fastd_instance:  "{{ site_code }}_babel"
+    fastd_interface: "{{ fastd_babel_interface }}"
+    fastd_port:      "{{ fastd_babel_port }}"
+    fastd_bind:      any
+    fastd_anonymous: true
+    fastd_bind_interface: "babel-{{ site_code }}"
+    fastd_bind_batman: false
+
 - name: Include fastd instance
   import_tasks: instance.yml
   vars:
@@ -63,6 +74,12 @@
   file:
     src: /etc/fastd/{{ site_code }}/secret.conf
     dest: /etc/fastd/{{ site_code }}_legacy/secret.conf
+    state: link
+
+- name: Symlink fastd secrets
+  file:
+    src: /etc/fastd/{{ site_code }}/secret.conf
+    dest: /etc/fastd/{{ site_code }}_babel/secret.conf
     state: link
 
 - name: Install fastd blacklist

@@ -62,6 +62,7 @@ class Inventory:
       "ipv6_local_network":  self.attributeString("ipv6_local_network"),
       "ipv6_uplink_network": self.attributeString("ipv6_uplink_network"),
       "ipv6_global_network": self.attributeString("ipv6_global_network"),
+      "ipv6_babel_network":  self.attributeString("ipv6_babel_network"),
     }}
 
     return data
@@ -105,6 +106,7 @@ class Group:
       "batman_ipv4":        self.calculate_address("ipv4_network", id),
       "batman_ipv6_global": self.calculate_address("ipv6_global_network", id),
       "batman_ipv6_local":  self.calculate_address("ipv6_local_network", id),
+      "babel_ipv6":         self.calculate_address("ipv6_babel_network", id),
     })
 
     if self.dhcp:

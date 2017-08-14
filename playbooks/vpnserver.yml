@@ -9,6 +9,8 @@
   - main-bridge
   - role: fastd
     tags: fastd
+  - role: babeld
+    tags: babeld
   - alfred-announce-cleanup
   - mesh-announce
   - backbone-gre
