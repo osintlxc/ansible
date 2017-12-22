@@ -6,6 +6,8 @@ After=basic.target network.target fastd.service babeld.service
 [Service]
 Type=simple
 ExecStart=/usr/local/bin/l3roamd -p {{ ipv6_local_network }} -b {{ babel_interface }} -m {{ babel_interface }} -m {{ vpn_interface }} -i lo -t 252 -a {{ babel_ipv6.address }} -4 0:0:0:0:0:ffff::/96
+StandardOutput=null
+StandardError=null
 KillMode=process
 ExecStartPost=/sbin/ip link set dev l3roam0 up
 Restart=always

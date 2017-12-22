@@ -5,7 +5,7 @@ After=basic.target network.target fastd.service babeld.service
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/mmfd -v
+ExecStart=/usr/local/bin/mmfd
 ExecStartPost=/sbin/ip link set mmfd0 up
 KillMode=process
 Restart=always

@@ -10,7 +10,11 @@
   - role: fastd
     tags: fastd
   - role: babeld
-    tags: babeld
+    tags: babel
+  - role: mmfd
+    tags: babel
+  - role: l3roamd
+    tags: babel
   - alfred-announce-cleanup
   - mesh-announce
   - backbone-gre
