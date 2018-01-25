@@ -13,7 +13,9 @@ iface {{ babel_interface }} inet6 static
 	post-up  ip -6 rule add iif $IFACE table {{ ffhb_routing_table }} priority 16385
 	pre-down ip -6 rule del iif $IFACE table {{ ffhb_routing_table }} priority 16385
 
-	post-up  ip -6 rule add to {{ ipv6_babel_network }} table {{ ffhb_routing_table }} priority 16385
-	pre-down ip -6 rule del to {{ ipv6_babel_network }} table {{ ffhb_routing_table }} priority 16385
+	post-up  ip -6 rule add to {{ babel_ipv6_network }} table {{ ffhb_routing_table }} priority 16385
+	pre-down ip -6 rule del to {{ babel_ipv6_network }} table {{ ffhb_routing_table }} priority 16385
+	post-up  ip -6 rule add to {{ batman_ipv6_network }} table {{ ffhb_routing_table }} priority 16385
+	pre-down ip -6 rule del to {{ batman_ipv6_network }} table {{ ffhb_routing_table }} priority 16385
 	post-up  ip -6 rule add to {{ ipv6_local_network }} table {{ ffhb_routing_table }} priority 16385
 	pre-down ip -6 rule del to {{ ipv6_local_network }} table {{ ffhb_routing_table }} priority 16385

@@ -18,7 +18,7 @@ class Inventory:
 
   groups = {}
 
-  def __init__(self, site_conf, ipv6_global_network=None, ipv6_local_network=None, ipv6_uplink_network=None, icvpn_ipv4_network=None, icvpn_ipv6_network=None):
+  def __init__(self, site_conf, ipv6_global_network=None, batman_ipv6_network=None, ipv6_local_network=None, ipv6_uplink_network=None, icvpn_ipv4_network=None, icvpn_ipv6_network=None):
 
     # read and parse site.conf
     with open(site_conf,'r') as f:
@@ -26,19 +26,24 @@ class Inventory:
       if not isinstance(self.site, dict):
         raise TypeError("Unable to parse site.conf")
 
-    self.ipv4_network        = ipcalc.Network(self.site["prefix4"])
     self.icvpn_ipv4_network  = ipcalc.Network(icvpn_ipv4_network)
     self.icvpn_ipv6_network  = ipcalc.Network(icvpn_ipv6_network)
-    self.ipv6_uplink_network = ipcalc.Network(ipv6_uplink_network)
-    self.ipv6_global_network  = ipcalc.Network(ipv6_global_network)
+
+    self.ipv4_network        = ipcalc.Network(self.site["prefix4"])
 
     if "prefix6" in self.site:
       self.ipv6_local_network = ipcalc.Network(self.site["prefix6"])
     else:
       self.ipv6_local_network  = ipcalc.Network(ipv6_local_network)
 
+    self.ipv6_global_network = ipcalc.Network(ipv6_global_network)
+    self.ipv6_uplink_network = ipcalc.Network(ipv6_uplink_network)
+
+
     if "node_prefix6" in self.site:
-      self.ipv6_babel_network = ipcalc.Network(self.site["node_prefix6"])
+      self.babel_ipv6_network = ipcalc.Network(self.site["node_prefix6"])
+    if batman_ipv6_network is not None:
+      self.batman_ipv6_network = ipcalc.Network(batman_ipv6_network)
 
   def group(self, name, **options):
     group = Group(self, **options)
@@ -63,9 +68,10 @@ class Inventory:
       "site_code":           self.site["site_code"],
       "ipv4_network":        self.attributeString("ipv4_network"),
       "ipv6_local_network":  self.attributeString("ipv6_local_network"),
-      "ipv6_uplink_network": self.attributeString("ipv6_uplink_network"),
       "ipv6_global_network": self.attributeString("ipv6_global_network"),
-      "ipv6_babel_network":  self.attributeString("ipv6_babel_network"),
+      "ipv6_uplink_network": self.attributeString("ipv6_uplink_network"),
+      "babel_ipv6_network":  self.attributeString("babel_ipv6_network"),
+      "batman_ipv6_network": self.attributeString("batman_ipv6_network"),
     }}
 
     return data
@@ -105,11 +111,12 @@ class Group:
     vars = self.vars.copy()
     vars.update(host_vars)
     vars.update({
-      "vpn_id":             id,
-      "batman_ipv4":        self.calculate_address("ipv4_network", id),
-      "batman_ipv6_global": self.calculate_address("ipv6_global_network", id),
-      "batman_ipv6_local":  self.calculate_address("ipv6_local_network", id),
-      "babel_ipv6":         self.calculate_address("ipv6_babel_network", id),
+      "vpn_id":      id,
+      "ipv4":        self.calculate_address("ipv4_network", id),
+      "ipv6_local":  self.calculate_address("ipv6_local_network", id),
+      "ipv6_global": self.calculate_address("ipv6_global_network", id),
+      "babel_ipv6":  self.calculate_address("babel_ipv6_network", id),
+      "batman_ipv6": self.calculate_address("batman_ipv6_network", id),
     })
 
     if self.dhcp:
