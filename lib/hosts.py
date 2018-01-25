@@ -37,6 +37,9 @@ class Inventory:
     else:
       self.ipv6_local_network  = ipcalc.Network(ipv6_local_network)
 
+    if "node_prefix6" in self.site:
+      self.ipv6_babel_network = ipcalc.Network(self.site["node_prefix6"])
+
   def group(self, name, **options):
     group = Group(self, **options)
     self.groups[name] = group

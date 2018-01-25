@@ -8,3 +8,12 @@ iface {{ babel_interface }} inet6 static
 	up ip link set $IFACE up
 	down ip link set $IFACE down
 	address {{ babel_ipv6.address }}
+	post-up  ip -6 rule add from {{ babel_ipv6.address }} table {{ ffhb_routing_table }} priority 16385
+	pre-down ip -6 rule del from {{ babel_ipv6.address }} table {{ ffhb_routing_table }} priority 16385
+	post-up  ip -6 rule add iif $IFACE table {{ ffhb_routing_table }} priority 16385
+	pre-down ip -6 rule del iif $IFACE table {{ ffhb_routing_table }} priority 16385
+
+	post-up  ip -6 rule add to {{ ipv6_babel_network }} table {{ ffhb_routing_table }} priority 16385
+	pre-down ip -6 rule del to {{ ipv6_babel_network }} table {{ ffhb_routing_table }} priority 16385
+	post-up  ip -6 rule add to {{ ipv6_local_network }} table {{ ffhb_routing_table }} priority 16385
+	pre-down ip -6 rule del to {{ ipv6_local_network }} table {{ ffhb_routing_table }} priority 16385
